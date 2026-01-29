@@ -1,5 +1,5 @@
-from .base.base_component import BaseComponent
-from .base.net import Net
+from .base_component import BaseComponent
+from .net import Net
 
 
 class Schematic:

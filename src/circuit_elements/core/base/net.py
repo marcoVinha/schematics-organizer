@@ -1,6 +1,5 @@
 from __future__ import annotations
 from typing import Any
-from .base_component import BaseComponent
 
 
 class Net:
@@ -13,9 +12,9 @@ class Net:
         self.name = name
         self.is_ground = is_ground
         self.metadata = metadata or {}
-        self._connections: dict[BaseComponent, set[int]] = {}
+        self._connections: dict[Any, set[int]] = {}
 
-    def connect(self, component: BaseComponent, pin: int | str) -> None:
+    def connect(self, component: Any, pin: int | str) -> None:
         if isinstance(pin, str):
             p = component.pin(pin)
         else:
@@ -38,7 +37,7 @@ class Net:
         return self
 
     @property
-    def connections(self) -> dict[BaseComponent, set[int]]:
+    def connections(self) -> dict[Any, set[int]]:
         return {c: frozenset(p) for c, p in self._connections.items()}
 
     @property
