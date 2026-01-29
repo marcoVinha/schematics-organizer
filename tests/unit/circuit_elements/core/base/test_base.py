@@ -6,7 +6,6 @@ from circuit_elements.core.base.net import Net
 import pytest
 
 
-
 class DummyComponent(BaseComponent):
     @property
     def type(self) -> ComponentType:
