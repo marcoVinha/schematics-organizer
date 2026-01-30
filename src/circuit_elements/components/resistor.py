@@ -6,7 +6,7 @@ class Resistor(BaseComponent):
     def __init__(self, name: str, resistance_ohm: float):
         super().__init__(
             name=name,
-            pin_names=["a", "b"],
+            pin_names=["1", "2"],
             parameters={"resistance": resistance_ohm},
         )
 

@@ -10,5 +10,6 @@ class ComponentType(str, Enum):
     MOSFET = "mosfet"
     JFET = "jfet"
     OPAMP = "opamp"
+    POTENTIOMETER = "potentiometer"
     TRANSFORMER = "transformer"
     IC = "ic"

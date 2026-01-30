@@ -6,7 +6,7 @@ class Inductor(BaseComponent):
     def __init__(self, name: str, inductance_henry: float):
         super().__init__(
             name=name,
-            pin_names=["a", "b"],
+            pin_names=["1", "2"],
             parameters={"inductance": inductance_henry},
         )
 
