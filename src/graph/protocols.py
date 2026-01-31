@@ -1,5 +1,6 @@
 from __future__ import annotations
-from typing import Protocol, Iterable, Tuple, Mapping, FrozenSet
+
+from typing import FrozenSet, Iterable, Mapping, Protocol, Tuple
 
 
 class VertexLike(Protocol):

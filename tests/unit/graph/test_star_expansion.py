@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from itertools import combinations
+
 import pytest
 
 from circuit_elements.core.base.base_component import BaseComponent

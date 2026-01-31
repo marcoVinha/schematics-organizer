@@ -1,11 +1,11 @@
 from __future__ import annotations
+
 from typing import Optional
+
 import matplotlib.pyplot as plt
 import networkx as nx
 
-from graph.networkx_utils import (
-    build_net_multigraph_from_vertices,
-)
+from graph.networkx_utils import build_net_multigraph_from_vertices
 
 
 def _draw_net_multigraph(G: nx.MultiGraph, *, save_path: Optional[str]) -> None:

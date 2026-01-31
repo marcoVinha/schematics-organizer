@@ -2,11 +2,8 @@ from __future__ import annotations
 
 import networkx as nx
 
-from graph.networkx_utils import (
-    build_bipartite_graph_from_vertices,
-    build_net_multigraph_from_vertices,
-)
-
+from graph.networkx_utils import (build_bipartite_graph_from_vertices,
+                                  build_net_multigraph_from_vertices)
 
 # -------------------------
 # Minimal protocol-satisfying fakes

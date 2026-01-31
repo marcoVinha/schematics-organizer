@@ -1,6 +1,7 @@
 from __future__ import annotations
+
 from typing import Callable, Optional
-import matplotlib
+
 import matplotlib.pyplot as plt
 import networkx as nx
 

@@ -1,6 +1,8 @@
 from __future__ import annotations
-from typing import Iterable, List, Iterator
-from graph.protocols import VertexLike, Incidence, HypergraphLike
+
+from typing import Iterable, Iterator, List
+
+from graph.protocols import Incidence, VertexLike
 
 
 def star_expansion_from_vertices(vertices: Iterable[VertexLike]) -> List[Incidence]:

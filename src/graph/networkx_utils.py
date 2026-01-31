@@ -1,6 +1,7 @@
-from typing import Iterable, Tuple, Any
-import networkx as nx
 from itertools import combinations
+from typing import Iterable
+
+import networkx as nx
 
 
 def build_bipartite_graph_from_vertices(vertices: Iterable) -> nx.MultiGraph:

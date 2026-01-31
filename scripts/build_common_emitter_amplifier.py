@@ -14,6 +14,9 @@ from graph.networkx_utils import (
 )
 from graph.planarity import is_planar_graph
 
+from schematic_visualization.component_graph_conversion import (
+    build_component_centric_graph,
+)
 from schematic_visualization.schematic_visualization_tools import visualize_schematic
 
 
@@ -120,4 +123,6 @@ if __name__ == "__main__":
 
     save_graph_visualization(multi_graph, save_path="common-emitter-amplifier.png")
 
-    visualize_schematic(schematic.nets, save_path="circuit.png")
+    visualize_schematic(
+        build_component_centric_graph(schematic.nets), save_path="circuit.png"
+    )
