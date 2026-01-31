@@ -6,6 +6,7 @@ from circuit_elements.components.potentiometer import Potentiometer
 from circuit_elements.core.base.net import Net
 from circuit_elements.core.base.schematic import Schematic
 
+from graph.graph_visualization import save_graph_visualization
 from graph.start_expansion import star_expansion_from_vertices
 from graph.networkx_utils import (
     build_bipartite_graph_from_vertices,
@@ -126,3 +127,5 @@ if __name__ == "__main__":
     print("Net multigraph edges:", list(multi_graph.edges(data=True)))
 
     print(f"Is graph planar? {True if is_planar_graph(multi_graph) else False}")
+
+    save_graph_visualization(multi_graph, save_path="common-emitter-amplifier.png")
