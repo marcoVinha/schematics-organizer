@@ -1,4 +1,3 @@
-# tests/unit/core/graph/test_graph_builders_protocol_only.py
 from __future__ import annotations
 
 import networkx as nx
