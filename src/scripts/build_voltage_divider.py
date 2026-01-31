@@ -8,6 +8,7 @@ from graph.networkx_utils import (
     build_bipartite_graph_from_vertices,
     build_net_multigraph_from_vertices,
 )
+from graph.planarity import is_planar_graph
 
 
 # ─────────────────────────────────────────────
@@ -102,3 +103,5 @@ if __name__ == "__main__":
     multi_graph = build_net_multigraph_from_vertices(schematic.nets)
     print("Net multigraph nodes:", multi_graph.nodes(data=True))
     print("Net multigraph edges:", list(multi_graph.edges(data=True)))
+
+    print(f"Is graph planar? {True if is_planar_graph(multi_graph) else False}")
