@@ -1,8 +1,10 @@
+from math import sin
 from circuit_elements.components.resistor import Resistor
 from circuit_elements.components.capacitor import Capacitor
 from circuit_elements.components.npn_transistor import NPNTransistor
 from circuit_elements.components.potentiometer import Potentiometer
 
+from circuit_elements.components.voltage_source import VoltageSource
 from circuit_elements.core.base.net import Net
 from circuit_elements.core.base.schematic import Schematic
 
@@ -34,6 +36,12 @@ def build_common_emitter_amplifier() -> Schematic:
     sch.add_net(output_signal)
 
     # Components
+    vcc_source = VoltageSource("VccSource", voltage=9.0)
+
+    input_signal_source = VoltageSource(
+        "InputSignalSource", voltage=lambda t: 0.1 * sin(t * 628.32)
+    )
+
     r1 = Resistor("R1", 10_000)
     r2 = Resistor("R2", 470_000)
     r3 = Resistor("R3", 47_000)
@@ -48,6 +56,8 @@ def build_common_emitter_amplifier() -> Schematic:
 
     output_load = Resistor("OutputLoad", float("inf"))
 
+    sch.add_component(vcc_source)
+    sch.add_component(input_signal_source)
     sch.add_component(r1)
     sch.add_component(r2)
     sch.add_component(r3)
@@ -58,19 +68,26 @@ def build_common_emitter_amplifier() -> Schematic:
     sch.add_component(pot1)
     sch.add_component(output_load)
 
-    # CONNECTION
-    # Vcc: one leg of R1 and R2
+    # CONNECTIONS
+
+    # Vcc: one leg of VccSource, one leg of R1 and R2
+    vcc.connect(vcc_source, pin="+")
     vcc.connect(r1, pin="1")
     vcc.connect(r2, pin="1")
 
-    # GND: one leg of R3, R4 and Output Load
+    # InputSignal: one leg of C1
+    input_signal.connect(input_signal_source, pin="+")
+    input_signal.connect(c1, pin="1")
+
+    # GND: one leg of VccSource,
+    # one leg of InputSignalSource,
+    # one leg of R3, R4 and Output Load
+    gnd.connect(vcc_source, pin="-")
+    gnd.connect(input_signal_source, pin="-")
     gnd.connect(r3, pin="2")
     gnd.connect(r4, pin="2")
     gnd.connect(pot1, pin="3")
     gnd.connect(output_load, pin="2")
-
-    # InputSignal: one leg of C1
-    input_signal.connect(c1, pin="1")
 
     # OutputSignal: wiper of VOL, one leg of Output Load
     output_signal.connect(pot1, pin="2")
@@ -97,10 +114,6 @@ def build_common_emitter_amplifier() -> Schematic:
 
     return sch
 
-
-# ─────────────────────────────────────────────
-# Manual inspection
-# ─────────────────────────────────────────────
 
 if __name__ == "__main__":
     schematic = build_common_emitter_amplifier()

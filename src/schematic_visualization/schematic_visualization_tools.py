@@ -75,11 +75,13 @@ def _draw_net_multigraph(G: nx.MultiGraph, *, save_path: Optional[str]) -> None:
         fig.savefig(save_path, dpi=150, bbox_inches="tight")
         print(f"Saved net-graph visualization to {save_path}")
 
+
 from typing import Iterable, Union
 
 # import your builders / drawing helpers
-from schematic_visualization.component_graph_conversion import \
-    build_component_centric_graph
+from schematic_visualization.component_graph_conversion import (
+    build_component_centric_graph,
+)
 
 
 def visualize_schematic(

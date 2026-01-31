@@ -13,3 +13,4 @@ class ComponentType(str, Enum):
     POTENTIOMETER = "potentiometer"
     TRANSFORMER = "transformer"
     IC = "ic"
+    VOLTAGE_SOURCE = "voltage_source"
