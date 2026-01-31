@@ -3,6 +3,8 @@ from circuit_elements.core.base.component_type import ComponentType
 from circuit_elements.core.base.net import Net
 from circuit_elements.core.base.schematic import Schematic
 
+from graph.start_expansion import star_expansion_from_vertices
+
 
 # ─────────────────────────────────────────────
 # Concrete component: Resistor
@@ -83,3 +85,8 @@ if __name__ == "__main__":
         print(f"  {comp}")
         for pin in comp.pins:
             print(f"    {pin}")
+
+    incidences = star_expansion_from_vertices(schematic.nets)
+
+    for v, comp, pin in incidences:
+        print(f"({v.name}, {comp.name}, pin_index={pin})")
