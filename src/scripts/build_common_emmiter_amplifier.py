@@ -6,6 +6,12 @@ from circuit_elements.components.potentiometer import Potentiometer
 from circuit_elements.core.base.net import Net
 from circuit_elements.core.base.schematic import Schematic
 
+from graph.start_expansion import star_expansion_from_vertices
+from graph.networkx_utils import (
+    build_bipartite_graph_from_vertices,
+    build_net_multigraph_from_vertices,
+)
+
 
 def build_common_emitter_amplifier() -> Schematic:
     sch = Schematic()
@@ -104,3 +110,16 @@ if __name__ == "__main__":
         print(f"  {comp}")
         for pin in comp.pins:
             print(f"    {pin}")
+
+    incidences = star_expansion_from_vertices(schematic.nets)
+
+    for v, comp, pin in incidences:
+        print(f"({v.name}, {comp.name}, pin_index={pin})")
+
+    bipartite_graph = build_bipartite_graph_from_vertices(schematic.nets)
+    print("Bipartite nodes:", bipartite_graph.nodes(data=True))
+    print("Bipartite edges:", list(bipartite_graph.edges(data=True)))
+
+    multi_graph = build_net_multigraph_from_vertices(schematic.nets)
+    print("Net multigraph nodes:", multi_graph.nodes(data=True))
+    print("Net multigraph edges:", list(multi_graph.edges(data=True)))
