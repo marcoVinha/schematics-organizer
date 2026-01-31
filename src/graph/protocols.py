@@ -1,32 +1,19 @@
-from typing import Protocol, Iterable
+from __future__ import annotations
+from typing import Protocol, Iterable, Tuple, Mapping, FrozenSet
 
 
 class VertexLike(Protocol):
-    """Vertexes of a graph."""
-
     name: str
+    connections: Mapping["HyperedgeLike", FrozenSet[int]]
 
 
 class HyperedgeLike(Protocol):
-    """A hyperedge connects more than two vertexes (unlike normal edges)."""
-
     name: str
 
 
-class IncidenceLike(Protocol):
-    """Carries info about how the vertex connects to the hyperedge."""
-
-    vertex: VertexLike
-    hyperedge: HyperedgeLike
-
-
 class HypergraphLike(Protocol):
-    """
-    A hypergraph is a graph with hyperedges, and it can be represented
-    by an incidence list telling what vertexes are connected to what
-    hyperedges and how they're connected.
-    """
+    @property
+    def vertices(self) -> Iterable[VertexLike]: ...
 
-    vertices: Iterable[VertexLike]
-    hyperedges: Iterable[HyperedgeLike]
-    incidences: Iterable[tuple[VertexLike, HyperedgeLike, int]]
+
+Incidence = Tuple[VertexLike, HyperedgeLike, int]
