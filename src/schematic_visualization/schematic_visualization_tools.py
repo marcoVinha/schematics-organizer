@@ -75,17 +75,39 @@ def _draw_net_multigraph(G: nx.MultiGraph, *, save_path: Optional[str]) -> None:
         fig.savefig(save_path, dpi=150, bbox_inches="tight")
         print(f"Saved net-graph visualization to {save_path}")
 
+from typing import Iterable, Union
+
+# import your builders / drawing helpers
+from schematic_visualization.component_graph_conversion import \
+    build_component_centric_graph
+
 
 def visualize_schematic(
-    vertices: list,  # Iterable of Net-like vertices (protocol-compatible)
+    vertices_or_graph: Union[Iterable, nx.Graph],
     *,
+    view: str = "nets",  # "nets" or "components"
     save_path: Optional[str] = None,
 ) -> None:
     """
-    Build a graph from `vertices` and draw a schematic-like view.
+    Accept either:
+      - an iterable of VertexLike objects (your previous API), or
+      - a ready-to-plot networkx.Graph / MultiGraph.
 
-    - vertices: iterable of Net-like objects (your Net objects or anything satisfying VertexLike)
-    - save_path: optional file path to save the figure (PNG/PDF/etc.)
+    If a graph is passed, use it directly. If vertex-like objects are passed,
+    build the requested view's graph first.
     """
-    G = build_net_multigraph_from_vertices(vertices)
+    # -------------------------
+    # New: detect if argument is already a NetworkX graph
+    # -------------------------
+    if isinstance(vertices_or_graph, nx.Graph):
+        G = vertices_or_graph
+    else:
+        # treat as vertices iterable and build the requested graph
+        if view == "components":
+            G = build_component_centric_graph(vertices_or_graph)
+        else:
+            G = build_net_multigraph_from_vertices(vertices_or_graph)
+    # -------------------------
+
+    # draw using your existing drawing function (which expects a networkx graph)
     _draw_net_multigraph(G, save_path=save_path)
