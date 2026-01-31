@@ -14,6 +14,8 @@ from graph.networkx_utils import (
 )
 from graph.planarity import is_planar_graph
 
+from schematic_visualization.schematic_visualization_tools import visualize_schematic
+
 
 def build_common_emitter_amplifier() -> Schematic:
     sch = Schematic()
@@ -101,18 +103,6 @@ def build_common_emitter_amplifier() -> Schematic:
 if __name__ == "__main__":
     schematic = build_common_emitter_amplifier()
 
-    print(schematic)
-
-    print("\nNets:")
-    for net in schematic.nets:
-        print(f"  {net}")
-
-    print("\nComponents:")
-    for comp in schematic.components:
-        print(f"  {comp}")
-        for pin in comp.pins:
-            print(f"    {pin}")
-
     incidences = star_expansion_from_vertices(schematic.nets)
 
     for v, comp, pin in incidences:
@@ -129,3 +119,5 @@ if __name__ == "__main__":
     print(f"Is graph planar? {True if is_planar_graph(multi_graph) else False}")
 
     save_graph_visualization(multi_graph, save_path="common-emitter-amplifier.png")
+
+    visualize_schematic(schematic.nets, save_path="circuit.png")
