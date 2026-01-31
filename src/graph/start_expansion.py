@@ -17,15 +17,6 @@ def star_expansion_from_vertices(vertices: Iterable[VertexLike]) -> List[Inciden
     return incidences
 
 
-def star_expansion(hg: HypergraphLike) -> List[Incidence]:
-    """
-    Convenience wrapper that accepts a HypergraphLike and delegates to
-    `star_expansion_from_vertices`. Keeps the public API explicit about
-    working on hypergraph-like objects.
-    """
-    return star_expansion_from_vertices(hg.vertices)
-
-
 def star_expansion_iter(vertices: Iterable[VertexLike]) -> Iterator[Incidence]:
     """
     Memory-friendly generator variant yielding incidences one-by-one.
